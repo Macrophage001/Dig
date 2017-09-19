@@ -1,28 +1,21 @@
 package macrophage.dig.helper;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.List;
 
 public class OreDictHelper {
-    public static String getOreDictName(ItemStack itemStack) {
-        String[] oreNames = OreDictionary.getOreNames();
-        String   oreDictName = "";
-        for (String oreName : oreNames) {
-            List<ItemStack> oreStacks = OreDictionary.getOres(oreName);
-            if (oreStacks != null) {
-                ItemStack oreStack = oreStacks.get(0);
-                String oreStackRegName = oreStack.getItem().getRegistryName().toString();
-                String itemStackRegName = itemStack.getItem().getRegistryName().toString();
+    public static String[] oreDictPrefixes = { "ore", "block", "log", "plank", "nugget" };
 
-                if (oreStackRegName.compareTo(itemStackRegName) == 0) {
-                    oreDictName = oreName;
-                }
-            } else {
-                oreDictName = "No entry found";
-            }
+    public static String getOreDictName(ItemStack itemStack) {
+        String ore_dict_name = "";
+        try {
+            ore_dict_name = OreDictionary.getOreName(OreDictionary.getOreIDs(itemStack)[0]);
+        } catch ( IllegalArgumentException ignored) {
+
         }
-        return oreDictName;
+        return ore_dict_name;
     }
 }

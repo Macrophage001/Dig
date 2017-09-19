@@ -5,20 +5,19 @@ import net.minecraft.item.Item;
 
 public class Resource implements IResource {
     @Override
-    public String getDropModName() { return null; }
+    public String getDropModId() { return null; }
 
     @Override
-    public String getParentBlockModName() { return null; }
+    public String getParentBlockModId() { return null; }
 
     @Override
-    public Item getDrop() {
-        return null;
-    }
+    public String getParentBlockName() { return null; }
 
     @Override
-    public Block getParentBlock() {
-        return null;
-    }
+    public String getDropName() { return null; }
+
+    @Override
+    public String getProperTool() { return null; }
 
     @Override
     public Integer getMaxBlockDegradation() { return null; }
@@ -37,4 +36,20 @@ public class Resource implements IResource {
     public Integer getItemMetadata() {
         return null;
     }
+
+    @Override
+    public Item getDrop() {
+        return null;
+    }
+
+    @Override
+    public Block getParentBlock() {
+        return null;
+    }
+
+    @Override
+    public boolean getToolBreakOnUse() { return false; }
+
+    @Override
+    public boolean getToolDamageOnUse() { return false; }
 }

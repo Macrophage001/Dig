@@ -1,69 +1,48 @@
 package macrophage.dig.handler;
 
-import macrophage.dig.api.ResourceRegistry;
-import macrophage.dig.api.resource.IResource;
-import macrophage.dig.helper.ResourceHelper;
+import macrophage.dig.util.ModInfo;
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.FileSystem;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigHandler {
-    public static Configuration config;
+@Config(
+        modid = ModInfo.MODID,
+        name  = ModInfo.MODID + "/" + ModInfo.MODID,
+        category = ""
+)
+@Config.LangKey("dig.config.title")
+public final class ConfigHandler {
+    public static ConfigHandler.Features features;
 
-    public static String CATEGORY_DROPS = "Drops";
-    public static String CATEGORY_DROPS_DESC = "What items can be dropped, from which block, and the chance of them dropping";
+    public ConfigHandler() {}
 
-    public static String FORMAT = "(block_modid)<block_registry/oredict_name>:<metadata>=<max_durability>|(drop_modid)<drop_registry/oredict_name>:<metadata>=<drop_chance>";
+    @Mod.EventBusSubscriber
+    private static class EventHandler {
+        private EventHandler() {
+        }
 
-    public static void init(File file) {
-        config = new Configuration(file);
-        syncConfig();
+        @SubscribeEvent
+        public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
+            if(event.getModID().equals(ModInfo.MODID)) {
+                ConfigManager.sync(ModInfo.MODID, Config.Type.INSTANCE);
+            }
+
+        }
     }
 
-    public static void reInit(File file) {
-        try {
-            Files.deleteIfExists(file.toPath());
-        } catch (IOException e) {
-            System.err.println(e);
-        }
-
-        init(file);
-    }
-
-    public static void syncConfig() {
-        config.addCustomCategoryComment(CATEGORY_DROPS, CATEGORY_DROPS_DESC);
-        List<IResource> ress = ResourceRegistry.getResources();
-        List<String> serRess = new ArrayList<String>();
-        if (ress.size() > 0) {
-            for (IResource res : ress) {
-                try {
-                    serRess.add(ResourceHelper.serialize(res));
-                } catch (NullPointerException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        String[] serRessArray = new String[serRess.size()];
-        serRess.toArray(serRessArray);
-
-        String[] confSerRess = config.get(CATEGORY_DROPS, "Drops", serRessArray, FORMAT).getStringList();
-
-        for (String serres : confSerRess) {
-            if (serres.compareTo("") != 0) {
-                System.out.println(serres);
-                IResource resource = ResourceHelper.deserialize(serres);
-                ResourceRegistry.register(resource, null);
-            }
-        }
-
-        config.save();
+    public static class Features {
+        @Config.Comment(ModInfo.CONFIG_ALERTS_COMMENT)
+        public static boolean DISPLAY_ALERTS = false;
+        @Config.Comment(ModInfo.CONFIG_SNEAK_COMMENT)
+        public static boolean SNEAK_REQUIRED = true;
+        @Config.Comment(ModInfo.CONFIG_SCRIPTS_FOLDER_COMMENT)
+        public static String SCRIPTS_FOLDER = ModInfo.SCRIPTS_FOLDER;
     }
 }

@@ -23,11 +23,8 @@ public class DegradationHandler {
     private static Map<DegradationBlock, List<IResource>> mBlocks = new HashMap<DegradationBlock, List<IResource>>();
 
     public static void addBlock(BlockPos blockPos, Integer maxDegValue, List<IResource> resources) {
-        if (blockPos == null) return;
-        if (resources == null) return;
-        if (maxDegValue == null) return;
-
-        mBlocks.put(new DegradationBlock(blockPos, maxDegValue), resources);
+        if (blockPos != null && maxDegValue != null && resources.size() != 0)
+            mBlocks.put(new DegradationBlock(blockPos, maxDegValue), resources);
     }
 
     public static void delBlock(BlockPos blockPos) {

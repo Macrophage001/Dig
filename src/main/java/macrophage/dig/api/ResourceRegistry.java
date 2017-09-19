@@ -30,4 +30,8 @@ public class ResourceRegistry {
     public static void removeAll() {
         resources.clear();
     }
+
+    public static boolean hasResources() {
+        return resources.size() > 0;
+    }
 }

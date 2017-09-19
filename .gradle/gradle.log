@@ -1,5 +1,7 @@
+This mapping 'snapshot_20170624' was designed for MC 1.12! Use at your own peril.This mapping 'snapshot_20170624' was designed for MC 1.12! Use at your own peril.
+
 #################################################
-         ForgeGradle 2.2-SNAPSHOT-c438b06        
+         ForgeGradle 2.3-SNAPSHOT-a34ebfc        
   https://github.com/MinecraftForge/ForgeGradle  
 #################################################
                Powered by MCP unknown               
@@ -7,7 +9,7 @@
          by: Searge, ProfMobius, Fesh0r,         
          R4wk, ZeuX, IngisKahn, bspkrs           
 #################################################
-Version string '1.0.10_1.10.2' does not match SemVer specification 
+Version string '1.1.7_1.12.1' does not match SemVer specification 
 You should try SemVer : http://semver.org/
 :deobfCompileDummyTask
 :deobfProvidedDummyTask
@@ -16,12 +18,18 @@ You should try SemVer : http://semver.org/
 :processApiResources UP-TO-DATE
 :apiClasses UP-TO-DATE
 :sourceMainJava
-:compileJavawarning: [options] bootstrap class path not set in conjunction with -source 1.6
-Note: C:\Users\Darnell\Documents\Projects\Java\Modded Minecraft\1.10.2\Dig\build\sources\main\java\macrophage\dig\handler\PlayerDigEventHandler.java uses or overrides a deprecated API.
-Note: Recompile with -Xlint:deprecation for details.
-1 warning
+:compileJavaC:\Users\Darnell\Documents\Projects\Java\Modded Minecraft\1.12.1\Dig\build\sources\main\java\macrophage\dig\Dig.java:14: warning: Script is internal proprietary API and may be removed in a future release
+import sun.font.Script;
+               ^
+C:\Users\Darnell\Documents\Projects\Java\Modded Minecraft\1.12.1\Dig\build\sources\main\java\macrophage\dig\Dig.java:14: warning: Script is internal proprietary API and may be removed in a future release
+import sun.font.Script;
+               ^
+C:\Users\Darnell\Documents\Projects\Java\Modded Minecraft\1.12.1\Dig\build\sources\main\java\macrophage\dig\Dig.java:14: warning: Script is internal proprietary API and may be removed in a future release
+import sun.font.Script;
+               ^
+3 warnings
 
-:processResources UP-TO-DATE
+:processResources
 :classes
 :jar
 :sourceTestJava UP-TO-DATE
@@ -36,7 +44,7 @@ Note: Recompile with -Xlint:deprecation for details.
 :genSrgs SKIPPED
 :reobfJar
 :extractRangemapReplacedMain
-C:\Users\Darnell\Documents\Projects\Java\Modded Minecraft\1.10.2\Dig\build\sources\main\java
+C:\Users\Darnell\Documents\Projects\Java\Modded Minecraft\1.12.1\Dig\build\sources\main\java
 :retromapReplacedMain
 remapping source...
 :sourceJar
@@ -46,4 +54,4 @@ remapping source...
 
 BUILD SUCCESSFUL
 
-Total time: 7.881 secs
+Total time: 9.632 secs
