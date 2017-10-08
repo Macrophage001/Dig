@@ -3,7 +3,7 @@
   "modid": "dig",
   "name": "Dig",
   "description": "Dig through blocks for resources.",
-  "version": "1.1.7",
+  "version": "1.1.11",
   "mcversion": "1.12.1",
   "url": "",
   "updateUrl": "",

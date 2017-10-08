@@ -6,6 +6,8 @@ import macrophage.dig.util.ModInfo;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
@@ -37,34 +39,21 @@ public class CommandListResources extends CommandBase {
         ITextComponent dropMeta = new TextComponentString("Metadata").setStyle(new Style().setColor(TextFormatting.DARK_GREEN));
         ITextComponent dropChance = new TextComponentString("Drop Chance").setStyle(new Style().setColor(TextFormatting.DARK_GREEN));
         ITextComponent toolBreakOnUse = new TextComponentString("Break Item?").setStyle(new Style().setColor(TextFormatting.DARK_GREEN));
+        ITextComponent toolDamageOnUse = new TextComponentString("Damage Item?").setStyle(new Style().setColor(TextFormatting.DARK_GREEN));
 
         if (args.length < 1|| args[0].compareTo("") == 0) throw new CommandException(getUsage(sender));
         if (args[0].compareTo("all") == 0) {
             if (ResourceRegistry.getResources().size() < 1) throw new CommandException("No entries available!");
             for (Integer index = 0; index < ResourceRegistry.getResources().size(); index++) {
                 IResource res = ResourceRegistry.getResources().get(index);
-                String resBlockName = "";
-                String resDropName = "";
-                if (res != null) {
-                    if (res.getParentBlockModId().compareTo("null") == 0) {
-                        resBlockName = res.getParentBlockName();
-                    } else {
-                        resBlockName = String.valueOf(res.getParentBlock().getRegistryName());
-                    }
 
-                    if (res.getDropModId().compareTo("null") == 0) {
-                        resDropName = res.getDropName();
-                    } else {
-                        resDropName = String.valueOf(res.getDrop().getRegistryName());
-                    }
-
-                    sender.sendMessage(new TextComponentString(new TextComponentString(index.toString()).setStyle(new Style().setColor(TextFormatting.GOLD)).getFormattedText()));
-                    sender.sendMessage(new TextComponentString(properTool.getFormattedText() + ": " + res.getProperTool()));
-                    sender.sendMessage(new TextComponentString(parentBlockName.getFormattedText() + ": " + resBlockName + ", " + parentBlockMeta.getFormattedText() + ": " + res.getBlockMetadata() + ", " + parentBlockDura.getFormattedText() + ": " + res.getMaxBlockDegradation()));
-                    sender.sendMessage(new TextComponentString(dropName.getFormattedText() + ": " + resDropName + ", " + dropMeta.getFormattedText() + ": " + res.getItemMetadata() + ", " + dropChance.getFormattedText() + ": " + res.getDropChance()));
-                    sender.sendMessage(new TextComponentString(toolBreakOnUse.getFormattedText() + ": " + String.valueOf(res.getToolBreakOnUse())));
-                    sender.sendMessage(new TextComponentString(" "));
-                }
+                sender.sendMessage(new TextComponentString(new TextComponentString(index.toString()).setStyle(new Style().setColor(TextFormatting.GOLD)).getFormattedText()));
+                sender.sendMessage(new TextComponentString(properTool.getFormattedText() + ": " + Item.getByNameOrId(res.getProperTool())));
+                sender.sendMessage(new TextComponentString(parentBlockName.getFormattedText() + ": " + new ItemStack(res.getParentBlock(), 1, res.getBlockMetadata()).getDisplayName() + ", " + parentBlockMeta.getFormattedText() + ": " + res.getBlockMetadata() + ", " + parentBlockDura.getFormattedText() + ": " + res.getMaxBlockDegradation()));
+                sender.sendMessage(new TextComponentString(dropName.getFormattedText() + ": " + new ItemStack(res.getDrop(), 1, res.getItemMetadata()).getDisplayName() + ", " + dropMeta.getFormattedText() + ": " + res.getItemMetadata() + ", " + dropChance.getFormattedText() + ": " + res.getDropChance()));
+                sender.sendMessage(new TextComponentString(toolBreakOnUse.getFormattedText() + ": " + String.valueOf(res.getToolBreakOnUse())));
+                sender.sendMessage(new TextComponentString(toolDamageOnUse.getFormattedText() + ": " + String.valueOf(res.getToolDamageOnUse())));
+                sender.sendMessage(new TextComponentString(" "));
             }
         } else {
             if (args.length == 2) {

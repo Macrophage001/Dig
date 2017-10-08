@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "1.1.7_1.12.1"
+version = "1.1.11_1.12.1"
 group = "macrophage.dig" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Dig"
 
@@ -67,7 +67,7 @@ processResources {
         include 'mcmod.info'
                 
         // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand '1.1.9':project.version, '1.12.1':project.minecraft.version
     }
         
     // copy everything else except the mcmod.info

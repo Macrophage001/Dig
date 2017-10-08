@@ -23,8 +23,10 @@ public class DegradationHandler {
     private static Map<DegradationBlock, List<IResource>> mBlocks = new HashMap<DegradationBlock, List<IResource>>();
 
     public static void addBlock(BlockPos blockPos, Integer maxDegValue, List<IResource> resources) {
-        if (blockPos != null && maxDegValue != null && resources.size() != 0)
-            mBlocks.put(new DegradationBlock(blockPos, maxDegValue), resources);
+        if (resources.size() != 0) {
+            DegradationBlock db = new DegradationBlock(blockPos, maxDegValue);
+            mBlocks.put(db, resources);
+        }
     }
 
     public static void delBlock(BlockPos blockPos) {
@@ -37,8 +39,8 @@ public class DegradationHandler {
         DegradationBlock db = getDegradationBlock(blockPos);
         if (db == null) return;
         db.degradationProgress--;
-        List<IResource> resources = mBlocks.get(getDegradationBlock(blockPos));
-        mBlocks.remove(getDegradationBlock(blockPos));
+        List<IResource> resources = mBlocks.get(db);
+        mBlocks.remove(db);
         mBlocks.put(db, resources);
     }
 
@@ -46,8 +48,8 @@ public class DegradationHandler {
         DegradationBlock db = getDegradationBlock(blockPos);
         if (db == null) return;
         db.almostFinished = value;
-        List<IResource> resources = mBlocks.get(getDegradationBlock(blockPos));
-        mBlocks.remove(getDegradationBlock(blockPos));
+        List<IResource> resources = mBlocks.get(db);
+        mBlocks.remove(db);
         mBlocks.put(db, resources);
     }
 
@@ -77,8 +79,7 @@ public class DegradationHandler {
 
     public static boolean hasAlmostFinished(BlockPos blockPos) {
         DegradationBlock db = getDegradationBlock(blockPos);
-        if (db == null) return false;
-        return db.almostFinished;
+        return db != null && db.almostFinished;
     }
 
     private static DegradationBlock getDegradationBlock(BlockPos blockPos) {

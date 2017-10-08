@@ -4,12 +4,7 @@ import macrophage.dig.api.ResourceRegistry;
 import macrophage.dig.api.resource.IResource;
 import macrophage.dig.api.resource.Resource;
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.List;
 
 public class ResourceHelper {
     public static String serialize(IResource resource) {

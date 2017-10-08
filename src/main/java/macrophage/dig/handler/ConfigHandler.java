@@ -40,9 +40,16 @@ public final class ConfigHandler {
     public static class Features {
         @Config.Comment(ModInfo.CONFIG_ALERTS_COMMENT)
         public static boolean DISPLAY_ALERTS = false;
-        @Config.Comment(ModInfo.CONFIG_SNEAK_COMMENT)
-        public static boolean SNEAK_REQUIRED = true;
         @Config.Comment(ModInfo.CONFIG_SCRIPTS_FOLDER_COMMENT)
         public static String SCRIPTS_FOLDER = ModInfo.SCRIPTS_FOLDER;
+        @Config.Comment(ModInfo.CONFIG_TOOL_BLACKLIST_COMMENT)
+        public static String[] TOOL_BLACKLIST = {};
+        @Config.Comment(ModInfo.CONFIG_ALLOW_HAND_DAMAGE_COMMENT)
+        public static boolean ALLOW_HAND_DAMAGE = true;
+        public static float HAND_DAMAGE_AMMOUNT = 1;
+        @Config.Comment(ModInfo.CONFIG_USE_HUNGER_COMMENT)
+        public static boolean USE_HUNGER = true;
+        public static float HUNGER_AMOUNT = 1;
+
     }
 }
